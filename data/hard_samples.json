@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "text": "A train travels from City A to City B, a distance of 240 kilometers, at a speed of 80 km/h. Therefore, the journey takes exactly 4 hours. If the train then returns at 60 km/h, the total round trip time is 7 hours and 20 minutes. The average speed for the entire round trip is therefore (80 + 60) / 2 = 70 km/h.",
+    "label": true,
+    "which_step_is_wrong": "average speed for the entire round trip is therefore (80 + 60) / 2 = 70 km/h",
+    "explanation": "Average speed cannot be calculated by averaging the two speeds. It must be total distance divided by total time: 480km / (3h + 4h) = 68.57 km/h."
+  },
+  {
+    "id": 2,
+    "text": "Compound interest grows exponentially over time. If you invest $1,000 at 5% annual interest compounded yearly, after 10 years you have $1,000 × (1.05)^10 = $1,628.89. After 20 years, since the growth doubles every decade, you would have $1,628.89 × 2 = $3,257.78.",
+    "label": true,
+    "which_step_is_wrong": "growth doubles every decade",
+    "explanation": "The claim that growth doubles every decade is wrong. The correct calculation is $1,000 × (1.05)^20 = $2,653.30, not $3,257.78. Doubling time at 5% is approximately 14.4 years by the Rule of 72, not 10 years."
+  },
+  {
+    "id": 3,
+    "text": "In his landmark 1987 paper 'Neural Substrates of Cognitive Flexibility', Dr. Michael Graziano of Princeton University demonstrated that the prefrontal cortex has no role in working memory tasks, a finding that overturned decades of neuroscientific consensus and was awarded the Kavli Prize in 2019.",
+    "label": true,
+    "which_step_is_wrong": "prefrontal cortex has no role in working memory tasks",
+    "explanation": "This is a fabricated paper with false claims. The prefrontal cortex is extensively documented to be central to working memory. The citation is invented."
+  },
+  {
+    "id": 4,
+    "text": "A rectangle has a length of 12 cm and a width of 8 cm. Its perimeter is 2 × (12 + 8) = 40 cm. Its area is 12 × 8 = 96 cm². The diagonal of the rectangle can be found using the Pythagorean theorem: √(12² + 8²) = √(144 + 64) = √208 ≈ 14.4 cm. Since the diagonal divides the rectangle into two equal triangles, each triangle has an area of 96 / 2 = 48 cm², which confirms the diagonal calculation is correct.",
+    "label": false,
+    "which_step_is_wrong": "",
+    "explanation": "All calculations in this passage are correct."
+  },
+  {
+    "id": 5,
+    "text": "According to a 2021 meta-analysis by Dr. Sarah Chen and colleagues published in Psychological Science (Vol. 32, pp. 1145–1162), bilingual children demonstrate superior executive function compared to monolingual peers, with effect sizes consistently above d = 0.8 across all 47 studies reviewed.",
+    "label": true,
+    "which_step_is_wrong": "effect sizes consistently above d = 0.8 across all 47 studies",
+    "explanation": "This misrepresents the bilingual advantage research. Meta-analyses in this area show highly variable and often small effect sizes, and several large-scale studies have failed to replicate the bilingual advantage. The uniform d=0.8 claim is fabricated."
+  },
+  {
+    "id": 6,
+    "text": "Water freezes at 0°C at standard atmospheric pressure. At the top of Mount Everest, atmospheric pressure is approximately one-third of sea level. Since lower pressure raises the freezing point of water, water on Everest's summit freezes at around 33°C.",
+    "label": true,
+    "which_step_is_wrong": "lower pressure raises the freezing point of water",
+    "explanation": "This is incorrect. Lower pressure lowers the boiling point of water but has a negligible effect on the freezing point. Water's freezing point is relatively insensitive to pressure changes in this range and remains near 0°C."
+  },
+  {
+    "id": 7,
+    "text": "A population of bacteria doubles every 20 minutes. Starting with 100 bacteria, after 1 hour (3 doubling periods) there will be 100 × 2³ = 800 bacteria. After 2 hours (6 doubling periods) there will be 100 × 2⁶ = 6,400 bacteria. After 3 hours, there will be 100 × 2⁹ = 51,200 bacteria.",
+    "label": false,
+    "which_step_is_wrong": "",
+    "explanation": "All exponential growth calculations are correct: 100×8=800, 100×64=6400, 100×512=51200."
+  },
+  {
+    "id": 8,
+    "text": "The global average temperature has risen by approximately 1.1°C since the pre-industrial period. At the current rate of warming of 0.2°C per decade, we will reach 1.5°C of warming in approximately 2 decades (by 2045). However, because climate change accelerates exponentially, scientists predict we will actually reach 3°C of warming by 2035 under all emission scenarios.",
+    "label": true,
+    "which_step_is_wrong": "reach 3°C of warming by 2035 under all emission scenarios",
+    "explanation": "No credible scientific body predicts 3°C by 2035 under all scenarios. This contradicts IPCC projections, which show 3°C is only reached by 2100 under high emission scenarios, not all scenarios, and certainly not by 2035."
+  },
+  {
+    "id": 9,
+    "text": "In his 2003 book 'The Architecture of Consciousness', philosopher David Chalmers introduced the concept of the 'explanatory gap' to describe the difficulty of explaining how physical brain processes give rise to subjective experience. This problem is now widely known as the hard problem of consciousness.",
+    "label": true,
+    "which_step_is_wrong": "introduced the concept of the explanatory gap",
+    "explanation": "Chalmers coined the term 'hard problem of consciousness' in his 1995 paper and 1996 book 'The Conscious Mind', not 2003. The term 'explanatory gap' was coined by philosopher Joseph Levine in 1983, not by Chalmers."
+  },
+  {
+    "id": 10,
+    "text": "Photovoltaic solar cells convert sunlight directly into electricity using the photoelectric effect. The efficiency of commercial solar panels typically ranges from 15% to 22%. This means that if 1,000 watts of sunlight hits one square meter of a 20% efficient panel, it produces 200 watts of electricity.",
+    "label": false,
+    "which_step_is_wrong": "",
+    "explanation": "All statements are accurate: photoelectric effect, efficiency range, and the 200W calculation (1000 × 0.20 = 200W) are all correct."
+  },
+  {
+    "id": 11,
+    "text": "A car accelerates from rest at a constant rate of 3 m/s². After 10 seconds, its velocity is 3 × 10 = 30 m/s. The distance covered during this acceleration is calculated using d = ½at², giving ½ × 3 × 100 = 150 meters. The kinetic energy at 30 m/s for a 1,000 kg car is ½ × 1000 × 30² = 450,000 joules = 450 kJ. Since the car stopped and restarted twice during acceleration, the total energy used is 3 × 450 = 1,350 kJ.",
+    "label": true,
+    "which_step_is_wrong": "since the car stopped and restarted twice during acceleration",
+    "explanation": "The problem states the car accelerates from rest at a constant rate — it never stops and restarts. This invented condition is false and the energy multiplication by 3 has no basis."
+  },
+  {
+    "id": 12,
+    "text": "RNA interference (RNAi) is a biological process in which RNA molecules inhibit gene expression by degrading specific mRNA molecules. It was discovered by Andrew Fire and Craig Mello, who shared the Nobel Prize in Physiology or Medicine in 2006 for this discovery.",
+    "label": false,
+    "which_step_is_wrong": "",
+    "explanation": "All facts are accurate. Fire and Mello did win the 2006 Nobel Prize for discovering RNAi."
+  },
+  {
+    "id": 13,
+    "text": "Studies show that 73% of statistics cited in casual conversation are made up on the spot. This well-documented phenomenon, known as the Dunning-Kruger Statistical Bias, was first quantified in a 1994 study by Dr. Howard Rheingold at Stanford, who surveyed 2,400 participants across six countries and found that confident-sounding false statistics are accepted as true by listeners 89% of the time.",
+    "label": true,
+    "which_step_is_wrong": "known as the Dunning-Kruger Statistical Bias",
+    "explanation": "The Dunning-Kruger effect relates to metacognitive incompetence, not statistical fabrication. The '73% of statistics are made up' is itself a famous joke, and Dr. Howard Rheingold (a real tech writer) conducted no such study. The entire passage is circular misinformation."
+  },
+  {
+    "id": 14,
+    "text": "The ideal gas law is PV = nRT, where P is pressure, V is volume, n is moles, R is the gas constant (8.314 J/mol·K), and T is temperature in Kelvin. A container holds 2 moles of gas at 300 K and 1 atm pressure. Converting 1 atm to Pascals gives 101,325 Pa. The volume is therefore V = nRT/P = (2 × 8.314 × 300) / 101,325 ≈ 0.0492 m³ ≈ 49.2 liters.",
+    "label": false,
+    "which_step_is_wrong": "",
+    "explanation": "All calculations are correct. V = (2 × 8.314 × 300) / 101325 = 4988.4 / 101325 ≈ 0.0492 m³ = 49.2 L, which matches the ideal gas law expectation of ~22.4L per mole at STP scaled to 300K."
+  },
+  {
+    "id": 15,
+    "text": "As reported in The Economist (March 2023), global income inequality has been declining steadily since 1990. The Gini coefficient for world income distribution fell from 0.72 in 1990 to 0.48 in 2022, representing a 33% decrease. This improvement is primarily attributed to rapid economic growth in China and India, which lifted over 1.2 billion people out of extreme poverty.",
+    "label": true,
+    "which_step_is_wrong": "gini coefficient for world income distribution fell from 0.72 in 1990 to 0.48 in 2022",
+    "explanation": "While within-country inequality often increased, global inequality trends are complex and contested. The specific Gini numbers cited are inaccurate — the global Gini is typically estimated around 0.60-0.67. The percentage decrease arithmetic (0.72 to 0.48 is a 33% decline) is correct but the source numbers are fabricated."
+  },
+  {
+    "id": 16,
+    "text": "In organic chemistry, a nucleophilic substitution reaction (SN2) proceeds via a backside attack mechanism where the nucleophile attacks the carbon opposite to the leaving group. This results in an inversion of configuration at the carbon center, known as Walden inversion. The reaction rate depends on both nucleophile and substrate concentration.",
+    "label": false,
+    "which_step_is_wrong": "",
+    "explanation": "All statements are chemically accurate descriptions of SN2 reactions."
+  },
+  {
+    "id": 17,
+    "text": "A simple pendulum has a period T = 2π√(L/g), where L is length and g is gravitational acceleration. A pendulum 1 meter long on Earth (g = 9.8 m/s²) has a period of 2π√(1/9.8) ≈ 2π × 0.319 ≈ 2.006 seconds. If we take this pendulum to the Moon where gravity is 1/6 of Earth's, the period becomes 6 times longer, giving approximately 12 seconds.",
+    "label": true,
+    "which_step_is_wrong": "period becomes 6 times longer",
+    "explanation": "This is a square root error. Since T ∝ √(1/g), and gravity is 1/6, the period increases by √6 ≈ 2.45 times, not 6 times. The correct Moon period is approximately 2.006 × √6 ≈ 4.9 seconds."
+  },
+  {
+    "id": 18,
+    "text": "The Marshall Plan, officially known as the European Recovery Program, was proposed by US Secretary of State George Marshall in 1947. It provided over $13 billion (equivalent to roughly $140 billion today) in economic aid to help rebuild Western European economies after World War II. It is widely credited with accelerating European economic recovery and helping prevent the spread of communism in Western Europe.",
+    "label": false,
+    "which_step_is_wrong": "",
+    "explanation": "All historical facts are accurate about the Marshall Plan."
+  },
+  {
+    "id": 19,
+    "text": "Machine learning models can suffer from overfitting when they learn noise in training data rather than true underlying patterns. Regularization techniques like L1 (Lasso) and L2 (Ridge) regression penalize large weights to prevent overfitting. L1 regularization adds the absolute values of weights to the loss function, which tends to produce dense weight vectors. L2 adds the squared values, which tends to produce sparse solutions.",
+    "label": true,
+    "which_step_is_wrong": "l1 regularization tends to produce dense weight vectors",
+    "explanation": "L1 (Lasso) regularization is known for producing sparse weight vectors by driving many weights to exactly zero. L2 (Ridge) produces dense solutions with small but nonzero weights. The description is reversed in the passage."
+  },
+  {
+    "id": 20,
+    "text": "In 2019, researchers at Google DeepMind published a paper in Nature claiming their AlphaFold system could predict protein structures with accuracy comparable to experimental methods. In 2021, AlphaFold 2 was released and successfully predicted the structures of nearly all human proteins, a breakthrough that transformed structural biology and drug discovery research.",
+    "label": false,
+    "which_step_is_wrong": "",
+    "explanation": "All facts about AlphaFold are accurate. The initial paper was in 2019, AlphaFold 2 released results in 2021, and it did cover nearly all human proteins."
+  }
+]

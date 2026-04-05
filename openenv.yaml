@@ -1,0 +1,60 @@
+name: openenv
+version: "1.0.0"
+description: >
+  An open evaluation environment for testing AI agents on hallucination detection.
+  The agent reads text samples and must decide whether the content is hallucinated,
+  provide a confidence score, and give a reason for its decision.
+
+tasks:
+  - id: 1
+    name: easy_hallucination_detection
+    difficulty: easy
+    description: >
+      Detect hallucinations in factually wrong Q&A pairs sourced from TruthfulQA.
+      Errors are clear and detectable with general knowledge.
+    data_file: data/easy_samples.json
+    total_samples: 75
+
+  - id: 2
+    name: medium_hallucination_detection
+    difficulty: medium
+    description: >
+      Detect hallucinations in longer, more subtle text from HaluEval.
+      Errors involve specific entities and require careful reading.
+    data_file: data/medium_samples.json
+    total_samples: 75
+
+  - id: 3
+    name: hard_hallucination_detection
+    difficulty: hard
+    description: >
+      Detect hallucinations in manually crafted reasoning paragraphs.
+      Errors include wrong math shown with steps, fake citations,
+      correct premises with wrong conclusions, and fabricated statistics.
+    data_file: data/hard_samples.json
+    total_samples: 20
+
+observation_space:
+  text:
+    type: string
+    description: The text passage the agent must evaluate.
+  task_id:
+    type: integer
+    description: Which task is currently active (1, 2, or 3).
+  sample_id:
+    type: integer
+    description: Index of the current sample within the task.
+
+action_space:
+  is_hallucination:
+    type: boolean
+    description: True if the agent believes the text contains a hallucination.
+  confidence:
+    type: float
+    range: [0.0, 1.0]
+    description: How confident the agent is in its decision.
+  reason:
+    type: string
+    description: >
+      The agent's explanation for its decision. Should mention specific
+      keywords, entities, or reasoning steps that justify the verdict.
