@@ -1,49 +1,91 @@
-name: openenv
-version: "1.0.0"
+name: hallucination-detection-env
+version: "2.0.0"
 description: >
-  An open evaluation environment for testing AI agents on hallucination detection.
-  The agent reads text samples and must decide whether the content is hallucinated,
-  provide a confidence score, and give a reason for its decision.
+  A reinforcement learning environment for training AI agents to detect
+  hallucinations in text. Built on openenv-core (Meta x PyTorch x HuggingFace).
+  The agent reads text passages and must determine whether they contain
+  factual errors, fabricated claims, flawed reasoning, or invented citations.
+  The reward signal is dense and meaningful — designed for GRPO/PPO post-training.
+
+author: "Your Team Name"
+license: "MIT"
+
+environment:
+  class: HallucinationEnv
+  module: env
+  supports_concurrent_sessions: true
 
 tasks:
   - id: 1
     name: easy_hallucination_detection
     difficulty: easy
     description: >
-      Detect hallucinations in factually wrong Q&A pairs sourced from TruthfulQA.
-      Errors are clear and detectable with general knowledge.
-    data_file: data/easy_samples.json
+      Common myths and misconceptions. Hallucinations are clear and detectable
+      with general knowledge. 75 samples (50 hallucinated, 25 correct).
+    data_source: data/easy_samples.json
     total_samples: 75
+    reward_criteria:
+      - correct_detection: 0.40
+      - confidence_calibration: 0.20
+      - keyword_specificity: 0.25
+      - reasoning_depth: 0.15
 
   - id: 2
     name: medium_hallucination_detection
     difficulty: medium
     description: >
-      Detect hallucinations in longer, more subtle text from HaluEval.
-      Errors involve specific entities and require careful reading.
-    data_file: data/medium_samples.json
+      Academic-sounding passages with subtle hallucinations — overstated certainties,
+      wrong statistics, impossible claims. Agent must name the specific wrong entity.
+      75 samples (30 hallucinated, 45 correct).
+    data_source: data/medium_samples.json
     total_samples: 75
+    reward_criteria:
+      - correct_detection: 0.35
+      - confidence_calibration: 0.15
+      - entity_identification: 0.35
+      - causal_explanation: 0.15
 
   - id: 3
     name: hard_hallucination_detection
     difficulty: hard
     description: >
-      Detect hallucinations in manually crafted reasoning paragraphs.
-      Errors include wrong math shown with steps, fake citations,
-      correct premises with wrong conclusions, and fabricated statistics.
-    data_file: data/hard_samples.json
+      Manually crafted reasoning errors — wrong math shown step by step, fake
+      citations with real authors, correct premises with wrong conclusions,
+      fabricated statistics. Agent must identify the exact failing step AND
+      explain WHY it is wrong. 20 samples (12 hallucinated, 8 correct).
+    data_source: data/hard_samples.json
     total_samples: 20
+    reward_criteria:
+      - correct_detection: 0.25
+      - confidence_calibration: 0.10
+      - step_identification: 0.35
+      - explains_why: 0.20
+      - reasoning_depth: 0.10
 
 observation_space:
   text:
     type: string
-    description: The text passage the agent must evaluate.
+    description: Text passage the agent evaluates.
   task_id:
     type: integer
-    description: Which task is currently active (1, 2, or 3).
+    values: [1, 2, 3]
+    description: Active task difficulty level.
   sample_id:
     type: integer
-    description: Index of the current sample within the task.
+    description: Index of current sample (0-based).
+  total_samples:
+    type: integer
+    description: Total samples in this episode.
+  task_name:
+    type: string
+    description: Human-readable task name.
+  done:
+    type: boolean
+    description: True when all samples in the episode are exhausted.
+  reward:
+    type: float
+    range: [0.0, 1.0]
+    description: Dense reward from the previous step. Null on the first observation.
 
 action_space:
   is_hallucination:
@@ -52,9 +94,30 @@ action_space:
   confidence:
     type: float
     range: [0.0, 1.0]
-    description: How confident the agent is in its decision.
+    description: >
+      Confidence in the decision. Should be high only when the error is
+      clear and specific. Rewarded for calibration, not just for being high.
   reason:
     type: string
     description: >
-      The agent's explanation for its decision. Should mention specific
-      keywords, entities, or reasoning steps that justify the verdict.
+      Explanation of the decision. For hallucinations: name the specific
+      false claim, identify which part fails, and explain WHY. For correct
+      text: explain what makes it accurate. Vague reasons score lower.
+
+reward_design:
+  philosophy: >
+    Rewards are designed to be dense (many distinct values in [0,1]),
+    meaningful (higher score = genuinely better reasoning), and not gameable
+    (cannot be maximised by keyword stuffing or pattern matching).
+  range: [0.0, 1.0]
+  components:
+    - name: correct_detection
+      description: Binary reward for correctly classifying hallucination vs correct text.
+    - name: confidence_calibration
+      description: Rewards confident correct answers and penalises overconfident wrong ones.
+    - name: specificity
+      description: Rewards naming specific entities, keywords, or reasoning steps.
+    - name: causal_explanation
+      description: Rewards explaining WHY something is wrong, not just THAT it is wrong.
+    - name: reasoning_depth
+      description: Rewards sufficiently detailed explanations (minimum word count).
