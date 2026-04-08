@@ -1,43 +1,41 @@
 from fastapi import FastAPI, HTTPException
-from env import OpenEnv, Action, Observation, Reward
-from typing import Optional
+from pydantic import BaseModel
+from env import HallucinationEnv, HallucinationAction
 
 app = FastAPI(
     title="OpenEnv — Hallucination Detection Environment",
     version="1.0.0",
-    description="An evaluation environment for testing AI agents on hallucination detection.",
 )
 
-env = OpenEnv()
+env = HallucinationEnv()
 
+class ResetRequest(BaseModel):
+    task_id: int = 1
 
 @app.get("/")
 def root():
-    return {"status": "ok", "message": "OpenEnv is running. Use /reset, /step, /state."}
-
+    return {"status": "ok", "message": "OpenEnv is running."}
 
 @app.post("/reset")
-def reset(task_id: int = 1):
-    if task_id not in [1, 2, 3]:
+def reset(request: ResetRequest):
+    if request.task_id not in [1, 2, 3]:
         raise HTTPException(status_code=400, detail="task_id must be 1, 2, or 3.")
-    obs = env.reset(task_id=task_id)
+    obs = env.reset(task_id=request.task_id)
     return obs.model_dump()
 
-
 @app.post("/step")
-def step(action: Action):
+def step(action: HallucinationAction):
     try:
-        next_obs, reward, done, info = env.step(action)
+        obs = env.step(action)
     except RuntimeError as e:
         raise HTTPException(status_code=400, detail=str(e))
     return {
-        "next_observation": next_obs.model_dump() if next_obs else None,
-        "reward": reward.model_dump(),
-        "done": done,
-        "info": info,
+        "observation": obs.model_dump(),  # ✅ "observation" not "next_observation"
+        "reward": obs.reward,             # ✅ float, not object
+        "done": obs.done,
+        "info": obs.metadata,
     }
-
 
 @app.get("/state")
 def state():
-    return env.state()
+    return env.state.model_dump()
