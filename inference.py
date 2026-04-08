@@ -146,5 +146,9 @@ def main():
     print(f"  Runtime: {elapsed:.1f}s")
 
 
+# Add these imports at the top
+from api import app
+import uvicorn
+
 if __name__ == "__main__":
-    main()
+    uvicorn.run(app, host="0.0.0.0", port=7860)
