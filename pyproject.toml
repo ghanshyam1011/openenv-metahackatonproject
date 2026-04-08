@@ -9,8 +9,15 @@ description = "A reinforcement learning environment for hallucination detection"
 requires-python = ">=3.10"
 license = {text = "MIT"}
 
-[project.optional-dependencies]
-dev = []
+dependencies = [
+    "openenv-core>=0.2.0",
+    "fastapi",
+    "uvicorn",
+    "pydantic",
+]
+
+[project.scripts]
+server = "api:app"
 
 [tool.openenv]
 env_class = "HallucinationEnv"
