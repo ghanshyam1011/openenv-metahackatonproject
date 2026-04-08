@@ -16,11 +16,17 @@ class ResetRequest(BaseModel):
 def root():
     return {"status": "ok", "message": "OpenEnv is running."}
 
+from typing import Optional
+
+class ResetRequest(BaseModel):
+    task_id: int = 1
+
 @app.post("/reset")
-def reset(request: ResetRequest):
-    if request.task_id not in [1, 2, 3]:
+def reset(request: Optional[ResetRequest] = None):
+    task_id = request.task_id if request else 1
+    if task_id not in [1, 2, 3]:
         raise HTTPException(status_code=400, detail="task_id must be 1, 2, or 3.")
-    obs = env.reset(task_id=request.task_id)
+    obs = env.reset(task_id=task_id)
     return obs.model_dump()
 
 @app.post("/step")
