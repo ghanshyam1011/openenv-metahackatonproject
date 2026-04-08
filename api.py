@@ -1,5 +1,4 @@
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+from fastapi import FastAPI, HTTPException, Query
 from env import HallucinationEnv, HallucinationAction
 
 app = FastAPI(
@@ -9,21 +8,12 @@ app = FastAPI(
 
 env = HallucinationEnv()
 
-class ResetRequest(BaseModel):
-    task_id: int = 1
-
 @app.get("/")
 def root():
     return {"status": "ok", "message": "OpenEnv is running."}
 
-from typing import Optional
-
-class ResetRequest(BaseModel):
-    task_id: int = 1
-
 @app.post("/reset")
-def reset(request: Optional[ResetRequest] = None):
-    task_id = request.task_id if request else 1
+def reset(task_id: int = Query(default=1)):
     if task_id not in [1, 2, 3]:
         raise HTTPException(status_code=400, detail="task_id must be 1, 2, or 3.")
     obs = env.reset(task_id=task_id)
@@ -36,8 +26,8 @@ def step(action: HallucinationAction):
     except RuntimeError as e:
         raise HTTPException(status_code=400, detail=str(e))
     return {
-        "observation": obs.model_dump(),  # ✅ "observation" not "next_observation"
-        "reward": obs.reward,             # ✅ float, not object
+        "observation": obs.model_dump(),
+        "reward": obs.reward,
         "done": obs.done,
         "info": obs.metadata,
     }
