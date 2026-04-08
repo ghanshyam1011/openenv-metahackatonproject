@@ -22,5 +22,5 @@ server = "api:app"
 [tool.openenv]
 env_class = "HallucinationEnv"
 env_module = "env"
-entry_point = "api:app"
+entry_point = "server.app:main"
 port = 7860
