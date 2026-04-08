@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "hallucination-detection-env"
+version = "2.0.0"
+description = "A reinforcement learning environment for hallucination detection"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+
+[project.optional-dependencies]
+dev = []
+
+[tool.openenv]
+env_class = "HallucinationEnv"
+env_module = "env"
+entry_point = "api:app"
+port = 7860
