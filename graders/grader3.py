@@ -192,7 +192,8 @@ def grade(action, sample: dict) -> tuple[float, dict]:
         "reasoning_quality": round(reasoning_score, 4),
         "method": method,
     }
-    total = round(min(detect_score + reasoning_score, 1.0), 4)
+     total = round(min(detect_score + reasoning_score, 1.0), 4)
+    total = max(0.0001, min(total, 0.9999))  # ← add this line
     return total, breakdown
 
 
