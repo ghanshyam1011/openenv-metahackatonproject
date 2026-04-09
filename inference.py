@@ -103,8 +103,8 @@ def run_task(task_id: int) -> None:
         print(f"[STEP] step={step_num} reward={round(reward, 4)}", flush=True)
 
     final_score = round(total_reward / max(step_num, 1), 4)
+    final_score = max(0.0001, min(final_score, 0.9999))
     print(f"[END] task={task_name} score={final_score} steps={step_num}", flush=True)
-
 
 if __name__ == "__main__":
     for task_id in [1, 2, 3]:
