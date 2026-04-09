@@ -142,4 +142,5 @@ def grade(action, sample: dict) -> tuple[float, dict]:
         "causal_explanation":   round(causal_score, 4),
     }
     total = round(sum(breakdown.values()), 4)
-    return total, breakdown
+  total = max(0.0001, min(total, 0.9999))  # ← add this
+  return total, breakdown
