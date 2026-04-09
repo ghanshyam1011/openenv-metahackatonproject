@@ -84,7 +84,7 @@ observation_space:
     description: True when all samples in the episode are exhausted.
   reward:
     type: float
-    range: [0.0, 1.0]
+    range: [0.0001, 0.9999]
     description: Dense reward from the previous step. Null on the first observation.
 
 action_space:
@@ -93,7 +93,7 @@ action_space:
     description: True if the agent believes the text contains a hallucination.
   confidence:
     type: float
-    range: [0.0, 1.0]
+    range: [0.0001, 0.9999]
     description: >
       Confidence in the decision. Should be high only when the error is
       clear and specific. Rewarded for calibration, not just for being high.
@@ -109,7 +109,7 @@ reward_design:
     Rewards are designed to be dense (many distinct values in [0,1]),
     meaningful (higher score = genuinely better reasoning), and not gameable
     (cannot be maximised by keyword stuffing or pattern matching).
-  range: [0.0, 1.0]
+  range: [0.0001, 0.9999]
   components:
     - name: correct_detection
       description: Binary reward for correctly classifying hallucination vs correct text.
