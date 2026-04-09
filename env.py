@@ -198,6 +198,7 @@ def compute_reward(action: HallucinationAction, sample: dict, task_id: int) -> t
         breakdown["reasoning_depth"] = 0.1 if len(action.reason.split()) >= 15 else 0.0
 
     total = round(sum(breakdown.values()), 4)
+    total = max(0.0001, min(total, 0.9999))
     return total, breakdown
 
 
