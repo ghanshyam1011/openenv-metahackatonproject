@@ -193,8 +193,8 @@ def grade(action, sample: dict) -> tuple[float, dict]:
         "method": method,
     }
      total = round(min(detect_score + reasoning_score, 1.0), 4)
-    total = max(0.0001, min(total, 0.9999))  # ← add this line
-    return total, breakdown
+     total = max(0.0001, min(total, 0.9999))  # ← add this line
+     return total, breakdown
 
 
 def _try_llm_judge(action, sample, which_step) -> float | None:
